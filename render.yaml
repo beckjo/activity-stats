@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: activity-stats-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npx prisma migrate deploy
+    startCommand: npm start
+    disk:
+      name: sqlite-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: file:/data/prod.db
+      - key: PORT
+        value: 3001
+      # Set these in the Render dashboard (secrets):
+      # STRAVA_CLIENT_ID
+      # STRAVA_CLIENT_SECRET
+      # STRAVA_REDIRECT_URI   → https://your-app.onrender.com/api/auth/callback
+      # JWT_SECRET
+      # FRONTEND_URL          → https://your-username.github.io/activity-stats

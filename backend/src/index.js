@@ -43,7 +43,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/activities', activitiesRoutes);
 app.use('/api/compare', compareRoutes);
 
-// Health check
+// Health check (also used by Render as health check URL)
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });

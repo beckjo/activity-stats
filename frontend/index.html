@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="View and analyze your Strava activity history" />
     <title>Activity Stats</title>
+    <script>
+      // Restore path encoded by 404.html (GitHub Pages SPA routing)
+      (function () {
+        var p = window.location.search.match(/[?&]p=([^&]*)/);
+        if (p) {
+          var path = decodeURIComponent(p[1]);
+          var q = window.location.search.match(/[?&]q=([^&]*)/);
+          window.history.replaceState(
+            null, null,
+            window.location.pathname.split('/').slice(0, -1).join('/') +
+            '/' + path + (q ? '?' + decodeURIComponent(q[1]) : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
