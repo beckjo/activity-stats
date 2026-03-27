@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/jonathanbeck/Sites/activity-stats/backend/prisma /Users/jonathanbeck/Sites/activity-stats/backend/src/routes /Users/jonathanbeck/Sites/activity-stats/backend/src/services /Users/jonathanbeck/Sites/activity-stats/backend/src/middleware)",
+      "Bash(mkdir -p /Users/jonathanbeck/Sites/activity-stats/frontend/src/components /Users/jonathanbeck/Sites/activity-stats/frontend/src/hooks /Users/jonathanbeck/Sites/activity-stats/frontend/src/pages /Users/jonathanbeck/Sites/activity-stats/frontend/src/services /Users/jonathanbeck/Sites/activity-stats/frontend/public)",
+      "Bash(npm run:*)",
+      "Bash(timeout 5 node -e \":*)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)"
+    ]
+  }
+}

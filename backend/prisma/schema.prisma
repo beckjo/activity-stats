@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int        @id @default(autoincrement())
+  stravaId       Int        @unique
+  accessToken    String
+  refreshToken   String
+  tokenExpiresAt DateTime
+  firstName      String?
+  lastName       String?
+  profilePicture String?
+  syncStatus     String     @default("idle") // idle | syncing | complete | error
+  syncError      String?
+  lastSyncAt     DateTime?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  activities     Activity[]
+}
+
+model Activity {
+  id                   Int      @id @default(autoincrement())
+  stravaId             String   @unique
+  userId               Int
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name                 String
+  description          String?
+  type                 String
+  sportType            String
+  distance             Float    @default(0)
+  movingTime           Int      @default(0)
+  elapsedTime          Int      @default(0)
+  totalElevationGain   Float    @default(0)
+  startDate            DateTime
+  startDateLocal       DateTime
+  timezone             String?
+  averageSpeed         Float?
+  maxSpeed             Float?
+  averageHeartrate     Float?
+  maxHeartrate         Float?
+  averageCadence       Float?
+  averageWatts         Float?
+  normalizedPower      Float?
+  kilojoules           Float?
+  calories             Float?
+  kudosCount           Int      @default(0)
+  achievementCount     Int      @default(0)
+  mapSummaryPolyline   String?
+  startLat             Float?
+  startLng             Float?
+  endLat               Float?
+  endLng               Float?
+  gearId               String?
+  deviceName           String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([userId, startDateLocal]) // primary query pattern for compare/filter
+  @@index([userId, sportType])
+  @@index([startDate])
+  @@index([type])
+}
